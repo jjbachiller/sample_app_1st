@@ -13,6 +13,7 @@ group :development, :test do
 	gem 'guard-rspec', '1.2.1'
 	gem 'guard-spork', '1.2.0'
 	gem 'spork', '0.9.2'
+	gem 'nyan-cat-formatter', '0.1.0'
 end
 
 gem 'annotate', '2.5.0', group: :development
@@ -39,6 +40,7 @@ group :test do
 	gem 'capybara', '1.1.2'
 	gem 'rb-fsevent', '0.9.1', :require => false
 	gem 'growl', '1.0.3'
+	gem 'factory_girl_rails', '4.1.0'
 end
 
 # To use ActiveModel has_secure_password
