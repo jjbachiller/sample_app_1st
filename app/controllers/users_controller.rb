@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(params[:user])
   	if @user.save
+      # Esta línea no hace falta y no se por que, pero al registrarse ya accede solo.
+      # sign_in @user
       flash[:success] = "Welcome to the Sample App!"
   		redirect_to @user
   	else

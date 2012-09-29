@@ -53,6 +53,7 @@ describe "User pages" do
         before { click_button submit }
 
         it { should have_selector('div.alert.alert-success', text: 'Welcome to the Sample App!') }
+        it { should have_link('Sign out') }
       end
     end
   end
