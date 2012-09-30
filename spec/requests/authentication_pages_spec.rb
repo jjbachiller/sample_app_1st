@@ -14,6 +14,13 @@ describe "Authentication" do
   describe "signin" do
     before { visit signin_path }
 
+    it { should_not have_link('Users', href: users_path) }
+    it { should_not have_link('Profile') }
+    it { should_not have_link('Settings') }
+    it { should_not have_link('Sign out', href: signout_path) }
+    it { should have_link('Sign in', href: signin_path) }
+
+
     describe "with invalid information" do
       before { click_button "Sign in" }  
 
@@ -112,5 +119,23 @@ describe "Authentication" do
         end
       end
     end
+
+    describe "visiting the user index" do
+      let(:admin) { FactoryGirl.create(:user, admin: true) }
+
+      before { sign_in admin }
+
+      describe "admin cannot DELETE himself" do
+        before { delete user_path(admin) }
+        specify { response.should redirect_to(root_path) }
+      end
+
+      describe "admin cannot DELETE another admin" do
+        let(:another_admin) { FactoryGirl.create(:user, admin: true) }
+
+        before { delete user_path(another_admin) }
+        specify { response.should redirect_to(root_path) }
+      end
+    end    
   end
 end
