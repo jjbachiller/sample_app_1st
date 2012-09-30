@@ -3,7 +3,6 @@ module SessionsHelper
 	def sign_in(user)
 		cookies.permanent[:remember_token] = user.remember_token
 		self.current_user = user
-		# self.current_user = User.find(2)
 	end
 
 	def sign_out
@@ -12,7 +11,6 @@ module SessionsHelper
 	end
 
 	def signed_in?
-		# # FIXME!: Ojo esto está mal, por algún motivo al crear un nuevo objecto en el signup, se asigna al curren_user y peta si dejamos solo current_user.nil
 		!(current_user.nil?  || current_user.new_record?)
 	end
 
@@ -39,4 +37,12 @@ module SessionsHelper
 	def store_location
 		session[:return_to] = request.url
 	end
+
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in." 
+    end
+  end
+
 end
