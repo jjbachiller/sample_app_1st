@@ -41,8 +41,8 @@ describe "StaticPages" do
       end
 
       it "should render the user's feed" do
-        user.feed.each do |post|
-          page.should have_selector('li##{post.id}', text: post.content)
+        user.feed.each do |item|
+          page.should have_selector('li#'+item.id.to_s, text: item.content)
         end
       end
     end
